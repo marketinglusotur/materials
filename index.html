@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lusotur - Gestão Hoteleira Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            background: #0A2540;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0A2540 0%, #1a3a5f 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(253, 184, 19, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            filter: drop-shadow(0 0 20px rgba(253, 184, 19, 0.3));
+            transition: transform 0.3s;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        nav a:not(.cta-button)::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FDB813;
+            transition: width 0.3s;
+        }
+
+        nav a:not(.cta-button):hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #FDB813;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            color: #0A2540;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(253, 184, 19, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(253, 184, 19, 0.5);
+            background: linear-gradient(135deg, #FFA500 0%, #FDB813 100%);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0A2540 0%, #1a4d7f 50%, #0A2540 100%);
+            padding: 140px 40px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(253, 184, 19, 0.08) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(253, 184, 19, 0.15);
+            color: #FDB813;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 12px 30px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(253, 184, 19, 0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 80px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            text-shadow: 0 0 30px rgba(253, 184, 19, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: #ccc;
+            margin-bottom: 50px;
+            line-height: 1.6;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            color: #0A2540;
+            padding: 22px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(253, 184, 19, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(253, 184, 19, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            padding: 22px 50px;
+            border: 2px solid #FDB813;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(253, 184, 19, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(253, 184, 19, 0.2);
+        }
+
+        /* 3 Steps Section */
+        .steps-section {
+            background: linear-gradient(180deg, #0A2540 0%, #1a3a5f 100%);
+            padding: 120px 40px;
+            position: relative;
+        }
+
+        .steps-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .steps-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .steps-header h2 {
+            font-size: 16px;
+            color: #FDB813;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .steps-header h3 {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .steps-header h3 .highlight {
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 25px;
+            border: 2px solid rgba(253, 184, 19, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(253, 184, 19, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-15px);
+            border-color: #FDB813;
+            box-shadow: 0 25px 60px rgba(253, 184, 19, 0.3);
+        }
+
+        .step-card:hover::before {
+            opacity: 1;
+        }
+
+        .step-number {
+            font-size: 100px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.2;
+            position: absolute;
+            top: -10px;
+            right: 20px;
+        }
+
+        .step-card h4 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .step-card h4 .highlight {
+            color: #FDB813;
+        }
+
+        .step-card p {
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        /* Services Section */
+        .services-section {
+            background: linear-gradient(180deg, #1a3a5f 0%, #0A2540 100%);
+            padding: 120px 40px;
+        }
+
+        .services-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .services-intro {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .services-intro p {
+            font-size: 20px;
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .services-intro p .highlight {
+            color: #FDB813;
+            font-weight: 600;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .service-icon-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 40px 25px;
+            text-align: center;
+            border-radius: 20px;
+            border: 2px solid rgba(253, 184, 19, 0.15);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-icon-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(253, 184, 19, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.5s;
+            border-radius: 50%;
+        }
+
+        .service-icon-card:hover::before {
+            width: 200%;
+            height: 200%;
+        }
+
+        .service-icon-card:hover {
+            border-color: #FDB813;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(253, 184, 19, 0.2);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 10px rgba(253, 184, 19, 0.3));
+        }
+
+        .service-icon-card p {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Consultancy Section */
+        .consultancy-section {
+            background: linear-gradient(135deg, #0A2540 0%, #1a4d7f 100%);
+            padding: 120px 40px;
+        }
+
+        .consultancy-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .consultancy-text h3 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .consultancy-text p {
+            color: #ccc;
+            line-height: 1.9;
+            margin-bottom: 35px;
+            font-size: 17px;
+            font-weight: 300;
+        }
+
+        .consultancy-features {
+            list-style: none;
+            margin-bottom: 45px;
+        }
+
+        .consultancy-features li {
+            padding: 18px 0;
+            padding-left: 40px;
+            position: relative;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        .consultancy-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FDB813;
+            font-weight: 900;
+            font-size: 24px;
+        }
+
+        .consultancy-image {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            height: 600px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .consultancy-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid #FDB813;
+            border-radius: 25px;
+            z-index: 1;
+        }
+
+        .consultancy-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .consultancy-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Models Section */
+        .models-section {
+            background: linear-gradient(180deg, #1a3a5f 0%, #0A2540 100%);
+            padding: 120px 40px;
+        }
+
+        .models-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .models-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .models-header .number {
+            font-size: 100px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.2;
+        }
+
+        .models-header h3 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .models-header h3 .highlight {
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .models-header p {
+            color: #ccc;
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            margin-bottom: 80px;
+        }
+
+        .model-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 45px 35px;
+            border-radius: 25px;
+            border: 2px solid rgba(253, 184, 19, 0.2);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .model-card.recommended {
+            border-color: #FDB813;
+            box-shadow: 0 0 40px rgba(253, 184, 19, 0.3);
+            transform: scale(1.05);
+        }
+
+        .model-card:hover {
+            border-color: #FDB813;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(253, 184, 19, 0.3);
+        }
+
+        .model-card.recommended:hover {
+            transform: translateY(-10px) scale(1.07);
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            color: #0A2540;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 20px rgba(253, 184, 19, 0.4);
+        }
+
+        .model-badge {
+            background: rgba(253, 184, 19, 0.15);
+            color: #FDB813;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 25px;
+            border: 2px solid rgba(253, 184, 19, 0.3);
+        }
+
+        .model-card h4 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .model-card p {
+            color: #ccc;
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .model-features {
+            list-style: none;
+        }
+
+        .model-features li {
+            padding: 10px 0;
+            color: #fff;
+            font-size: 15px;
+            padding-left: 30px;
+            position: relative;
+            font-weight: 400;
+        }
+
+        .model-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FDB813;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 50px;
+            overflow-x: auto;
+            border: 2px solid rgba(253, 184, 19, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        th {
+            background: linear-gradient(135deg, rgba(253, 184, 19, 0.15) 0%, rgba(253, 184, 19, 0.05) 100%);
+            padding: 25px;
+            text-align: center;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid rgba(253, 184, 19, 0.2);
+            font-weight: 600;
+        }
+
+        th:first-child {
+            border-top-left-radius: 15px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 15px;
+        }
+
+        td {
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(253, 184, 19, 0.1);
+            transition: all 0.3s;
+            font-weight: 400;
+        }
+
+        tr:hover td {
+            background: rgba(253, 184, 19, 0.05);
+        }
+
+        td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .check {
+            color: #FDB813;
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .dash {
+            color: #555;
+            font-size: 24px;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: linear-gradient(135deg, #0A2540 0%, #1a4d7f 100%);
+            padding: 120px 40px;
+        }
+
+        .form-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .form-header h3 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .form-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 70px;
+            align-items: start;
+        }
+
+        .form-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .form-step {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid rgba(253, 184, 19, 0.2);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .form-step:hover {
+            border-color: #FDB813;
+            transform: translateX(10px);
+        }
+
+        .step-num {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 60px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.2;
+        }
+
+        .form-step h4 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #FDB813;
+            font-weight: 600;
+        }
+
+        .form-step p {
+            color: #ccc;
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .form-wrapper {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 55px;
+            border-radius: 25px;
+            border: 2px solid rgba(253, 184, 19, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(253, 184, 19, 0.2);
+            border-radius: 15px;
+            color: #fff;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 300;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FDB813;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(253, 184, 19, 0.2);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #888;
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            color: #0A2540;
+            padding: 22px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Oswald', sans-serif;
+            box-shadow: 0 10px 30px rgba(253, 184, 19, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(253, 184, 19, 0.5);
+        }
+
+        /* Clients Carousel Section */
+        .clients-section {
+            background: linear-gradient(180deg, #1a3a5f 0%, #0A2540 100%);
+            padding: 120px 40px;
+            overflow: hidden;
+        }
+
+        .clients-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .clients-header h3 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .clients-header h3 .highlight {
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .clients-header p {
+            color: #ccc;
+            font-size: 18px;
+            margin-bottom: 70px;
+            font-weight: 300;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 30px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 40px;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        .client-logo {
+            min-width: 220px;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .client-logo:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(253, 184, 19, 0.3);
+            border-color: #FDB813;
+        }
+
+        .client-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .client-logo:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #0A2540 0%, #1a4d7f 100%);
+            padding: 120px 40px;
+        }
+
+        .stats-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .stats-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .stats-header h3 {
+            font-size: 48px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .stats-header h3 .highlight {
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-header p {
+            color: #ccc;
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 50px 35px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 2px solid rgba(253, 184, 19, 0.2);
+            transition: all 0.4s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-15px);
+            border-color: #FDB813;
+            box-shadow: 0 25px 60px rgba(253, 184, 19, 0.3);
+        }
+
+        .stat-number {
+            font-size: 64px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Premium Section */
+        .premium-section {
+            background: linear-gradient(180deg, #1a3a5f 0%, #0A2540 100%);
+            padding: 120px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(253, 184, 19, 0.03) 35px, rgba(253, 184, 19, 0.03) 70px);
+            pointer-events: none;
+        }
+
+        .premium-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .premium-image {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            height: 650px;
+            box-shadow: 0 30px 80px rgba(253, 184, 19, 0.4);
+        }
+
+        .premium-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 4px solid #FDB813;
+            border-radius: 25px;
+            z-index: 1;
+        }
+
+        .premium-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .premium-image:hover img {
+            transform: scale(1.08);
+        }
+
+        .premium-text {
+            background: linear-gradient(135deg, rgba(253, 184, 19, 0.1) 0%, rgba(253, 184, 19, 0.05) 100%);
+            padding: 70px;
+            border-radius: 25px;
+            border: 3px solid #FDB813;
+            position: relative;
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            color: #0A2540;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: inline-block;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(253, 184, 19, 0.4);
+        }
+
+        .premium-text h3 {
+            font-size: 40px;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            color: #FDB813;
+            font-weight: 700;
+        }
+
+        .premium-text p {
+            color: #fff;
+            line-height: 1.9;
+            margin-bottom: 35px;
+            font-size: 17px;
+            font-weight: 300;
+        }
+
+        .premium-features {
+            list-style: none;
+            margin-bottom: 45px;
+        }
+
+        .premium-features li {
+            padding: 18px 0;
+            padding-left: 40px;
+            position: relative;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .premium-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FDB813;
+            font-weight: 900;
+            font-size: 24px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0A2540 0%, #1a3a5f 100%);
+            padding: 80px 40px 40px;
+            border-top: 4px solid #FDB813;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand h4 {
+            font-size: 36px;
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .footer-brand p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(253, 184, 19, 0.1);
+            border: 2px solid #FDB813;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FDB813;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, #FDB813 0%, #FFA500 100%);
+            color: #0A2540;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(253, 184, 19, 0.4);
+        }
+
+        .footer-column h5 {
+            color: #FDB813;
+            font-size: 16px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-weight: 300;
+        }
+
+        .footer-column ul li a:hover {
+            color: #FDB813;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(253, 184, 19, 0.2);
+            color: #888;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-content {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 56px;
+            }
+
+            .consultancy-content,
+            .premium-content,
+            .form-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .model-card.recommended {
+                transform: scale(1);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/marketinglusotur/materials/main/assets/logo-lusotur.png" alt="Lusotur">
+            </div>
+            <nav>
+                <a href="#empresa">Para Sua Empresa</a>
+                <a href="#planos">Planos Lusotur</a>
+                <a href="https://lusotur.com.br" target="_blank">Agência Lusotur</a>
+                <a href="https://centraldohospede.lusotur.com.br" target="_blank">Central de Atendimento ao Hóspede</a>
+                <a href="https://wa.me/5511988131279?text=Quero%20saber%20mais%20sobre%20a%20Lusotur%20%2C%20" class="cta-button">
+                    CONTRATE A LUSOTUR →
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">LUSOTUR É GESTÃO</div>
+            <h1>GESTÃO É <span class="highlight">OCUPAÇÃO</span></h1>
+            <p class="hero-subtitle">Desde 2012 gerando resultados com soluções de gestão hoteleira profissional</p>
+            <div class="hero-ctas">
+                <a href="#planos" class="btn-primary">CONHEÇA OS PLANOS →</a>
+                <a href="https://wa.me/5511988131279?text=Quero%20saber%20mais%20sobre%20a%20Lusotur%20%2C%20" class="btn-secondary">FALE COM ESPECIALISTA</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Steps Section -->
+    <section class="steps-section" id="empresa">
+        <div class="steps-container">
+            <div class="steps-header">
+                <h2>Transforme a gestão da sua pousada em</h2>
+                <h3>APENAS <span class="highlight">3 PASSOS</span></h3>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-number">01</span>
+                    <h4>CONHEÇA AS <span class="highlight">SOLUÇÕES</span> DE GESTÃO LUSOTUR</h4>
+                    <p>Nossas soluções para aumentar sua ocupação, o seu faturamento, reduzir custos com OTAs e facilitar a sua rotina com gestão profissional de todo o ecossistema de reservas online.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">02</span>
+                    <h4>ESCOLHA OS <span class="highlight">PLANOS</span> DE PARCERIA</h4>
+                    <p>Encontre o plano que melhor se adapta ao momento e necessidades da sua pousada. Sem custo fixo, sem mensalidade.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">03</span>
+                    <h4>ESCOLHA OS MELHORES <span class="highlight">SERVIÇOS</span> PARA SUA EMPRESA</h4>
+                    <p>A Lusotur conta com 3 planos de parceria aplicados através de diversos serviços, resultando em mais de 15 combinações possíveis para o seu negócio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="services-container">
+            <div class="services-intro">
+                <p>Nossas soluções para <span class="highlight">aumentar</span> o seu faturamento, <span class="highlight">atrair</span> mais hóspedes, <span class="highlight">economizar</span> com taxas e <span class="highlight">facilitar</span> sua rotina.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-icon-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="35" fill="none" stroke="#FDB813" stroke-width="4"/>
+                            <path d="M30 50 L45 65 L70 35" fill="none" stroke="#FDB813" stroke-width="5" stroke-linecap="round"/>
+                            <circle cx="50" cy="50" r="8" fill="#FDB813" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <p>Gestão de OTAs</p>
+                </div>
+                <div class="service-icon-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 15 L60 25 L70 20 L75 30 L85 30 L80 40 L90 50 L80 60 L85 70 L75 70 L70 80 L60 75 L50 85 L40 75 L30 80 L25 70 L15 70 L20 60 L10 50 L20 40 L15 30 L25 30 L30 20 L40 25 Z" fill="#FDB813" opacity="0.3"/>
+                            <circle cx="50" cy="50" r="20" fill="none" stroke="#FDB813" stroke-width="4"/>
+                        </svg>
+                    </div>
+                    <p>Social Media</p>
+                </div>
+                <div class="service-icon-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="30" width="30" height="40" rx="3" fill="none" stroke="#FDB813" stroke-width="3"/>
+                            <rect x="55" y="30" width="25" height="20" rx="3" fill="#FDB813" opacity="0.3"/>
+                            <rect x="55" y="55" width="25" height="15" rx="3" fill="none" stroke="#FDB813" stroke-width="3"/>
+                            <circle cx="35" cy="50" r="8" fill="#FDB813" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <p>Criativos</p>
+                </div>
+                <div class="service-icon-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="30" fill="none" stroke="#FDB813" stroke-width="4"/>
+                            <text x="50" y="60" text-anchor="middle" fill="#FDB813" font-size="35" font-weight="bold">R$</text>
+                        </svg>
+                    </div>
+                    <p>Precificação</p>
+                </div>
+                <div class="service-icon-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="30" width="60" height="40" rx="5" fill="none" stroke="#FDB813" stroke-width="3"/>
+                            <line x1="30" y1="45" x2="70" y2="45" stroke="#FDB813" stroke-width="3"/>
+                            <line x1="30" y1="55" x2="60" y2="55" stroke="#FDB813" stroke-width="3"/>
+                            <circle cx="65" cy="55" r="3" fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <p>Dados</p>
+                </div>
+                <div class="service-icon-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 30 C35 30 30 40 30 50 C30 65 40 70 50 70 C60 70 70 65 70 50 C70 40 65 30 50 30 Z" fill="none" stroke="#FDB813" stroke-width="3"/>
+                            <circle cx="50" cy="45" r="8" fill="#FDB813" opacity="0.5"/>
+                            <path d="M40 60 Q50 55 60 60" fill="none" stroke="#FDB813" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <p>Atendimento</p>
+                </div>
+                <div class="service-icon-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30 70 L45 40 L55 60 L70 30" fill="none" stroke="#FDB813" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="70" cy="30" r="5" fill="#FDB813"/>
+                            <polyline points="60,30 70,30 70,40" fill="none" stroke="#FDB813" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <p>Tráfego Pago</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultancy Section -->
+    <section class="consultancy-section">
+        <div class="consultancy-content">
+            <div class="consultancy-text">
+                <h3>Consultoria de Gestão Hoteleira</h3>
+                <p>Gestão de reservas e desenvolvimento de estratégias para o crescimento da sua pousada, buscando o maior retorno sobre os valores investidos.</p>
+                <ul class="consultancy-features">
+                    <li>Especialistas treinados e desenvolvidos pela Lusotur</li>
+                    <li>Atendimento constante, ágil e eficaz</li>
+                    <li>A expertise da maior assessoria de gestão hoteleira do Brasil na sua pousada</li>
+                </ul>
+                <a href="https://wa.me/5511988131279?text=Quero%20saber%20mais%20sobre%20a%20Lusotur%20%2C%20" class="btn-primary">MAIS SOBRE ESSA SOLUÇÃO →</a>
+            </div>
+            <div class="consultancy-image">
+                <img src="https://raw.githubusercontent.com/marketinglusotur/materials/main/assets/equipe-equipotel.jpg" alt="Equipe Lusotur">
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section class="models-section" id="planos">
+        <div class="models-container">
+            <div class="models-header">
+                <div class="number">02</div>
+                <h3>ESCOLHA OS <span class="highlight">PLANOS</span> DE PARCERIA</h3>
+                <p>Encontre o plano que melhor se adapta ao momento e necessidades da sua pousada.</p>
+            </div>
+
+            <div class="models-grid">
+                <div class="model-card">
+                    <div class="model-badge">Bronze</div>
+                    <h4>15%</h4>
+                    <p>Gestão completa de reservas sem custo fixo. Você paga menos e recebe mais.</p>
+                    <ul class="model-features">
+                        <li>Gestão completa OTAs</li>
+                        <li>Consultoria hoteleira</li>
+                        <li>Precificação inteligente</li>
+                        <li>Central de atendimento 9h-21h</li>
+                        <li>Repasse semanal via PIX</li>
+                    </ul>
+                </div>
+
+                <div class="model-card recommended">
+                    <div class="recommended-badge">RECOMENDADO</div>
+                    <div class="model-badge">Prata</div>
+                    <h4>17%</h4>
+                    <p>Tudo do Bronze + gestão profissional de redes sociais focada em hotelaria.</p>
+                    <ul class="model-features">
+                        <li>Tudo do Plano Bronze</li>
+                        <li>Gestão de redes sociais</li>
+                        <li>Criação de conteúdo</li>
+                        <li>Campanhas sazonais</li>
+                        <li>Social media sem custo fixo</li>
+                    </ul>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-badge">Ouro</div>
+                    <h4>17% + R$399</h4>
+                    <p>Tudo do Prata + tráfego pago para geração de reservas diretas.</p>
+                    <ul class="model-features">
+                        <li>Tudo do Plano Prata</li>
+                        <li>Gestão de Meta Ads e Google Ads</li>
+                        <li>Geração de reservas diretas</li>
+                        <li>Relatórios mensais</li>
+                        <li>Chatbot configurado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>BRONZE<br>15%</th>
+                            <th>PRATA<br>17%<br><small style="color:#FDB813">RECOMENDADO</small></th>
+                            <th>OURO<br>17% + R$399</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Gestão de OTAs</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Consultoria Hoteleira</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Social Media</td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Precificação</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Criativos</td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Atendimento</td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Tráfego Pago</td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="dash">—</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="contato">
+        <div class="form-container">
+            <div class="form-header">
+                <h3>Dê o próximo passo leva menos de um minuto</h3>
+            </div>
+            <div class="form-content">
+                <div class="form-steps">
+                    <div class="form-step">
+                        <span class="step-num">1</span>
+                        <h4>Preencha o formulário</h4>
+                        <p>Envie suas informações de contato. Todos os seus dados estarão seguros, vamos cuidar bem deles.</p>
+                    </div>
+                    <div class="form-step">
+                        <span class="step-num">2</span>
+                        <h4>Receba uma ligação</h4>
+                        <p>Em até 12 horas, um dos nossos especialistas fará uma ligação para agendar a reunião mais importante com você.</p>
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                    <form id="leadForm">
+                        <div class="form-group">
+                            <input type="text" id="nome" name="nome" placeholder="Qual é o seu nome e sobrenome?" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Qual seu e-mail corporativo?" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="empresa" name="empresa" placeholder="Qual o nome da sua pousada?" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="telefone" name="telefone" placeholder="Qual seu telefone?" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="faturamento" name="faturamento" placeholder="Qual o faturamento mensal da sua pousada?" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="segmento" name="segmento" placeholder="Qual o seu segmento?" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Receber mais informações</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Carousel Section -->
+    <section class="clients-section">
+        <div class="clients-container">
+            <div class="clients-header">
+                <h3>ALGUNS DOS <span class="highlight">CLIENTES LUSOTUR</span></h3>
+                <p>Temos mais histórias de sucesso do que qualquer outra empresa teve de clientes</p>
+            </div>
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+                    <div class="client-logo"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Ctext x='50%25' y
